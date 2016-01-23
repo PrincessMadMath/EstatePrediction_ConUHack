@@ -12,7 +12,6 @@ namespace PrincessAPI.Controllers
         [Route("info")]
         public string GetToken()
         {
-            ClarifaiAccess.Authentify();
             return ClarifaiAccess.GetInfo();
         }
 

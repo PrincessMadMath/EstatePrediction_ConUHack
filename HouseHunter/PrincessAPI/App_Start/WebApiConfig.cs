@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using PrincessAPI.Infrastructure;
 using System.Data.Entity;
+using PrincessAPI.Clarifai;
 
 namespace PrincessAPI
 {
@@ -25,6 +26,10 @@ namespace PrincessAPI
             Database.SetInitializer<SystemDBContext>(
                 new DropCreateDatabaseIfModelChanges<SystemDBContext>()
                 );
+
+
+            // Initialise Clarifai token
+            ClarifaiAccess.Authentify();
         }
     }
 }
