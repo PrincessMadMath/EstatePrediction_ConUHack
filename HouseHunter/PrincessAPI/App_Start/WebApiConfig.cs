@@ -17,11 +17,11 @@ namespace PrincessAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
+            /*config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+            );*/
 
             Database.SetInitializer<SystemDBContext>(
                 new DropCreateDatabaseIfModelChanges<SystemDBContext>()
