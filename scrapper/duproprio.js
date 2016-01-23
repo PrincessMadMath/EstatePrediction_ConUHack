@@ -6,7 +6,6 @@ var fs = require('fs');
 var path = require('path');
 
 
-
 var url = 'http://duproprio.com/house-for-sale-st-nicolas-quebec-en-607377';
 return scrape();
 /*
@@ -50,6 +49,23 @@ function findUrl(node) {
             .find('.colImg a')
             .attr('href')
     };
+}
+
+function findSoldIn(node) {
+    var a = node
+        .find('.infoSold > p')
+        .contents()
+        .map(function (index, element) {
+            if(element.data && _.trim(element.data) === 'Sold in') {
+                var a = element.next.children[0];
+                return a;
+            }
+            return undefined;
+        })
+        .filter(function(value) {
+            return value;
+        });
+    return a;
 }
 
 function formatPrices(str) {
@@ -160,9 +176,14 @@ function scrapMainPage(url) {
             var arr = $('.searchresult')
                 .map(function (index, element) {
                     var houseUrl = 'http://duproprio.com/'+findUrl($(element)).url;
+                    var soldeIn = findSoldIn($(element));
                     return findProperty(houseUrl)
                         .then(function(result) {
-                            return result;
+                            return _.merge(
+                                result,
+                                {url: houseUrl,
+                                 sold_in: soldeIn})
+
                         });
                 }).get();
             return Promise.all(arr).then(function(results) {
