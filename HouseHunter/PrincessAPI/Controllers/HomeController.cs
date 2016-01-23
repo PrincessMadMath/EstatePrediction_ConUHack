@@ -17,7 +17,7 @@ namespace PrincessAPI.Controllers
             var path = HttpContext.Current.Server.MapPath("~/");
             
             // get the text in the html file
-            var text = File.ReadAllText($"{path}/View/index.html");
+            var text = File.ReadAllText($"{path}/public/index.html");
             var response = new HttpResponseMessage
             {
                 Content = new StringContent(text)
