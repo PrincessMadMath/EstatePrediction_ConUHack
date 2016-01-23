@@ -14,15 +14,6 @@ namespace PrincessAPI.Controllers
     public class TestController : ApiController
     {
         [HttpGet]
-        [Route("")]
-        public string GetTestValue()
-        {
-            var clarifai = new ClarifaiAccess();
-            clarifai.Authentify();
-            return "YOU GOT IT!!!!!!!";
-        }
-
-        [HttpGet]
         [Route("testmodel")]
         public List<TestModel> GetTestModel()
         {
