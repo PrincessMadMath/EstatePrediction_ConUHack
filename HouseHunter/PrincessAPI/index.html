@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide { display: none!important; }
+    </style>
+    <title ng-bind="title">houseHunter</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <base href="/">
+
+    <!-- build:css styles/lib.css  MUST INCLUDE ALL REQUIRED STYLESHEETS FROM THE LIB-->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/app.css MUST INCLUDE styles/styles.css-->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+<body>
+    <div>
+        <div ng-include="'app/layout/shell.html'"></div>
+        <div id="splash-page" ng-show="showSplash">
+            <div class="page-splash">
+                <div class="page-splash-message">
+                    houseHunter
+                </div>
+                <div class="progress progress-striped active page-progress-bar">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- build:js js/lib.js  MUST ENTER ALL FILE FROM THE LIB FOLDER-->
+
+    <!-- bower:js MUST ENTER MODULE -> SERVICES -> DIRECTIVES -> CONTROLLER -> ROUTES -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+</body>
+</html>
