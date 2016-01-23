@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Controllers;
+﻿using System.Web.Http;
 using PrincessAPI.Clarifai;
 
 namespace PrincessAPI.Controllers
@@ -8,12 +6,18 @@ namespace PrincessAPI.Controllers
     [RoutePrefix("api/clarifai")]
     public class ClarifaiController : ApiController
     {
-        [HttpGet]
         [Route("info")]
+        [HttpGet]
         public string GetToken()
         {
-            ClarifaiAccess.Authentify();
             return ClarifaiAccess.GetInfo();
+        }
+
+        [Route("tag")]
+        [HttpPost]
+        public string TagsFromUrl(string url)
+        {
+            return ClarifaiAccess.GetTagFromUrl(url);
         }
 
     }

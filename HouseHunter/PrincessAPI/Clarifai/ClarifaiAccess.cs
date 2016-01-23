@@ -26,9 +26,9 @@ namespace PrincessAPI.Clarifai
             {
                 var values = new Dictionary<string, string>
                 {
-                   { "grant_type", "client_credentials" },
-                   { "client_id", ClientId },
-                   {"client_secret", ClientSecret }
+                    {"grant_type", "client_credentials"},
+                    {"client_id", ClientId},
+                    {"client_secret", ClientSecret}
                 };
 
                 var content = new FormUrlEncodedContent(values);
@@ -37,21 +37,21 @@ namespace PrincessAPI.Clarifai
 
                 var responseString = await response.Content.ReadAsStringAsync();
 
-                var data = (JObject)JsonConvert.DeserializeObject(responseString);
+                var data = (JObject) JsonConvert.DeserializeObject(responseString);
                 if (data["access_token"] != null)
                 {
-                    AccessToken = (string)data["access_token"];
+                    AccessToken = (string) data["access_token"];
                 }
             }
         }
-
         public static void Authentify()
         {
-            var task = new Task(AuthentifyAsync);
-            task.Start();
-            task.Wait();
+            AuthentifyAsync();
         }
 
+        /// <summary>
+        /// Get information on the Clarifai API subscription
+        /// </summary>
         private static async Task<string> GetInfoAsync()
         {
             // Do nothing if token is empty
@@ -63,19 +63,49 @@ namespace PrincessAPI.Clarifai
                 // Add Authorization header
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
 
-                var response = await client.GetAsync("https://api.clarifai.com/v1/info");
-                var responseString =  await response.Content.ReadAsStringAsync();
-                return responseString;
+                var response =
+                    await client.GetAsync("https://api.clarifai.com/v1/info", HttpCompletionOption.ResponseHeadersRead)
+                        .ConfigureAwait(false);
+                //var response = await client.GetStringAsync("https://api.clarifai.com/v1/info");
+                return await response.Content.ReadAsStringAsync();
             }
         }
-
         public static string GetInfo()
         {
-            var task = GetInfoAsync();
-            task.Wait();
-
-            return task.Result;
+            return GetInfoAsync().Result;
         }
 
+        /// <summary>
+        /// Get tag information from a url
+        /// </summary>
+        /// <param name="url"></param>
+        private static async Task<string> GetTagFromUrlAsync(string url)
+        {
+            // Do nothing if token is empty
+            if (string.IsNullOrEmpty(AccessToken))
+                return "";
+
+            using (var client = new HttpClient())
+            {
+                // Add Authorization header
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+
+                var values = new Dictionary<string, string>
+                {
+                    {"url", url}
+                };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = await client.PostAsync("https://api.clarifai.com/v1/tag/", content);
+
+                return await response.Content.ReadAsStringAsync();
+            }
+
+        }
+        public static string GetTagFromUrl(string url)
+        {
+            return GetTagFromUrlAsync(url).Result;
+        }
     }
 }
