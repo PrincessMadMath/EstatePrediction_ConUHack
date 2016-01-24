@@ -104,7 +104,98 @@ namespace PrincessAPI.API.Clarifai
             {
                 switch (tag.ToLower())
                 {
-                    case "":
+                    case "asking price":
+                        output.asking_price = true;
+                        break;
+                    case "landscape":
+                        output.landscape = true;
+                        break;
+                    case "scenic":
+                        output.scenic = true;
+                        break;
+                    case "travel":
+                        output.travel = true;
+                        break;
+                    case "environment":
+                        output.environment = true;
+                        break;
+                    case "patio":
+                        output.patio = true;
+                        break;
+                    case "parquet":
+                        output.parquet = true;
+                        break;
+                    case "mansion":
+                        output.mansion = true;
+                        break;
+                    case "yard":
+                        output.yard = true;
+                        break;
+                    case "architecture":
+                        output.architecture = true;
+                        break;
+                    case "interior design":
+                        output.interior_design = true;
+                        break;
+                    case "barn":
+                        output.barn = true;
+                        break;
+                    case "comfort":
+                        output.comfort = true;
+                        break;
+                    case "swimming pool":
+                        output.swimming_pool = true;
+                        break;
+                    case "garage":
+                        output.garage = true;
+                        break;
+                    case "suburb":
+                        output.suburb = true;
+                        break;
+                    case "porch":
+                        output.porch = true;
+                        break;
+                    case "flora":
+                        output.flora = true;
+                        break;
+                    case "modern":
+                        output.modern = true;
+                        break;
+                    case "classic":
+                        output.classic = true;
+                        break;
+                    case "gazebo":
+                        output.gazebo = true;
+                        break;
+                    case "villa":
+                        output.villa = true;
+                        break;
+                    case "hotel":
+                        output.hotel = true;
+                        break;
+                    case "old":
+                        output.old = true;
+                        break;
+                    case "fireplace":
+                        output.fireplace = true;
+                        break;
+                    case "minimalist":
+                        output.minimalist = true;
+                        break;
+                    case "luxury":
+                        output.luxury = true;
+                        break;
+                    case "pavement":
+                        output.pavement = true;
+                        break;
+                    case "pool":
+                        output.pool = true;
+                        break;
+                    case "contemporary":
+                        output.contemporary = true;
+                        break;
+                    case "final amount":
+                        output.final_amount = true;
                         break;
                 }
             }

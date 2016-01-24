@@ -16,6 +16,6 @@
         public string FinalAmount { get; set; }
         public string AskingAmount { get; set; }
 
-        public HouseType HouseType { get; set; }
+        //public HouseType HouseType { get; set; }
     }
 }

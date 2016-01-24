@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using PrincessAPI.Infrastructure;
@@ -18,6 +19,9 @@ namespace PrincessAPI.Utility.CSVParser
 
             using (var db = new SystemDBContext())
             {
+                if (!CheckTableExists())
+                    return;
+
                 var dbHouses = db.Houses.Select(x => x.Hash).ToList();
 
                 foreach (var house in houseModel.Where(house => !dbHouses.Contains(house.Hash)))
@@ -25,6 +29,20 @@ namespace PrincessAPI.Utility.CSVParser
                     db.Houses.Add(house);
                 }
                 db.SaveChanges();
+            }
+        }
+
+        private static bool CheckTableExists()
+        {
+            var context = new SystemDBContext();
+            try
+            {
+                context.Houses.Count();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

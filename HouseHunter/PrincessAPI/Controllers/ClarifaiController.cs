@@ -65,8 +65,8 @@ namespace PrincessAPI.Controllers
             {
                 return new Prediction()
                 {
-                    price = (string)data["Results"]["output1"]["value"]["Values"][0][30],
-                    error = (string)data["Results"]["output1"]["value"]["Values"][0][31]
+                    price = (string)data["Results"]["output1"]["value"]["Values"][0][31],
+                    error = (string)data["Results"]["output1"]["value"]["Values"][0][30]
                 };
             }
 
