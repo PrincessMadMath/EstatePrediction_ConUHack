@@ -10,7 +10,7 @@
     function GeniusController($q, logger, Address, $stateParams) {
         var vm = this;
         vm.address = '';
-        vm.prediction = {};
+        vm.prediction = undefined;
         activate();
 
         function activate() {

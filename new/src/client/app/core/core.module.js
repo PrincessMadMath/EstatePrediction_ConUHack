@@ -4,7 +4,7 @@
     angular
         .module('app.core', [
             'ngAnimate', 'ngSanitize', 'ngResource',
-            'blocks.exception', 'blocks.logger', 'blocks.router',
+            'blocks.exception', 'blocks.logger', 'blocks.router', 'app.services',
             'ui.router', 'ui.bootstrap'
         ]);
 })();

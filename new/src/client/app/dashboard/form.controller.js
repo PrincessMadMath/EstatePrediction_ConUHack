@@ -12,6 +12,10 @@
 
         vm.predictHouse = predictHouse;
         vm.predictCondo = predictCondo;
+        vm.addUrl =addUrl;
+
+        vm.urls = [];
+        vm.currentUrl = '';
         vm.home = {
             numberOfBedrooms: undefined,
             numberOfBathrooms: undefined,
@@ -37,6 +41,13 @@
 
         function activate() {
             logger.info('Main form controller activated');
+        }
+
+        function addUrl() {
+            vm.urls.push(
+                {url: vm.currentUrl}
+            );
+            vm.currentUrl = '';
         }
 
         function predictHouse() {
