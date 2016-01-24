@@ -7,7 +7,7 @@
     <div class="flexbox">
         <label class="address-label">
             Please enter an address
-            <input ng-enter=vm.search() type="text" ng-model="vm.address" class="main-address-input input-hg form-control">
+            <input id="Autocomplete" ng-autocomplete="result1" details="details1" options="options1 ng-enter=vm.search()" type="text" ng-model="vm.address" class="main-address-input input-hg form-control">
         </label>
     </div>
     <div class="page-header" style="margin-bottom: 500px;"></div>
