@@ -189,10 +189,11 @@ function scrapMainPage(url) {
         method: 'GET',
         headers: {
             'Accept-Language':'en',
-            'Cookie': 'overlaydisplayed=true; dp_shared_session=nribps4c5f3oa5ui5h2gjslia2; _gat=1; _gat_as25n45=1; dp_session2[uuid]=8ce5f0e6b1dbe0ac0e004dc8fe8e5a5cf086803c8dcf84093eebf4cc5315fa04; _sp_id.c781=9f6b1f3498348391.1453563607.1.1453563661.1453563607; _sp_ses.c781=*; _ga=GA1.2.1060607627.1449020072'
+            'Cookie':'dp_session2[uuid]=9caab6a6277a5232fbdb2a6493ccfa96adcc1765e77350a48b461a92c84e6062; dp_shared_session=noh914jbako8kv9m2fdv9fv2t6'
+    //'Cookie': 'overlaydisplayed=true; dp_shared_session=nribps4c5f3oa5ui5h2gjslia2; _gat=1; _gat_as25n45=1; dp_session2[uuid]=8ce5f0e6b1dbe0ac0e004dc8fe8e5a5cf086803c8dcf84093eebf4cc5315fa04; _sp_id.c781=9f6b1f3498348391.1453563607.1.1453563661.1453563607; _sp_ses.c781=*; _ga=GA1.2.1060607627.1449020072'
         }
     };
-
+    var url3 = url;
     return request.getAsync(options).spread(function(response, html) {
             var $ = cheerio.load(html);
 
@@ -234,38 +235,37 @@ function setPage(url, num) {
 
 function scrape() {
     var promises =[];
-    var url = 'http://duproprio.com/search/?hash=/g-re=6/s-pmin=0/s-pmax=99999999/s-build=1/s-parent=1/s-filter=sold/s-days=0/m-pack=house-condo/p-con=main/p-ord=date/p-dir=DESC/pa-ge=1/';
-    url = nextPage(url);
+    var url = 'http://duproprio.com/search/?hash=/g-re=6/s-pmin=0/s-pmax=99999999/s-build=1/s-parent=1/s-filter=sold/s-days=0/m-pack=house/p-con=main/p-ord=date/p-dir=DESC/pa-ge=1';
+    var urls = []
+
+    for(var i =50; i<=55; i++) {
+        urls[i] = url+i;
+    }
+    var promises = urls.map(function(url){
+        return scrapMainPage(url).catch(function(error) {
+            console.log(error);
+        });
+    });
+
     /*return scrapMainPage(url).then(function(results) {
         var a = results;
         return results;
     });*/
-    url = setPage(url, 101);
-    for(var i =0; i<5; i++) {
-        url = nextPage(url);
-        promises.push(scrapMainPage(url).catch(function(error) {
-            console.log(error);
-        }));
-    }
+    console.log('page scrapped');
     return Promise.all(promises).then(function(results) {
         writeToFile(_.flatten(results))
     });
 }
 
 function writeToFile(results) {
-    var saveLocation = path.join(__dirname, 'output2.json');
-    fs.readFile(saveLocation, function(err, data){
+    var saveLocation = path.join(__dirname, 'output13.json');
+        //allData = results.concat(JSON.parse(data));
+    var text = JSON.stringify((results));
+    fs.writeFile(saveLocation, text, function(err) {
         if(err) {
             return console.log(err);
         }
-        allData = results.concat(JSON.parse(data));
-        var text = JSON.stringify((allData));
-        fs.writeFile(saveLocation, text, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-            console.log("The file was saved!");
-        });
+        console.log("The file was saved!");
     });
 }
 
@@ -288,5 +288,6 @@ function findProperty(url) {
         console.log(error);
     });
 }
+
 
 
