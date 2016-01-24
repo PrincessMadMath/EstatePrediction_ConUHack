@@ -34,7 +34,7 @@ namespace PrincessAPI.Controllers
 
         [Route("predicthouse")]
         [HttpPost]
-        public string PredictHousePrice([FromBody] FormHouseModel model)
+        public Prediction PredictHousePrice([FromBody] FormHouseModel model)
         {
             if(model == null)
                 model = new FormHouseModel();
@@ -44,7 +44,11 @@ namespace PrincessAPI.Controllers
             var data = (JObject)JsonConvert.DeserializeObject(result);
             if (data["Results"] != null)
             {
-                return (string)data["Results"]["output1"]["value"]["Values"][0][17];
+                return new Prediction()
+                {
+                    price = (string) data["Results"]["output1"]["value"]["Values"][0][13],
+                    error = (string) data["Results"]["output1"]["value"]["Values"][0][14],
+                };
             }
 
             return null;

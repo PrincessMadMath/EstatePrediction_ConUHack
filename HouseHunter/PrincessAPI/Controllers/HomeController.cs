@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace PrincessAPI.Controllers
 {
-    [RoutePrefix("home")]
+    [RoutePrefix("")]
     public class HomeController : ApiController
     {
         [HttpGet]
@@ -17,7 +17,7 @@ namespace PrincessAPI.Controllers
             var path = HttpContext.Current.Server.MapPath("~/");
             
             // get the text in the html file
-            var text = File.ReadAllText($"{path}/public/index.html");
+            var text = File.ReadAllText($"{path}/index.html");
             var response = new HttpResponseMessage
             {
                 Content = new StringContent(text)

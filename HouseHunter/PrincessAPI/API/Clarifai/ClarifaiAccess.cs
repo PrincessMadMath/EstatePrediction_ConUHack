@@ -74,7 +74,7 @@ namespace PrincessAPI.API.Clarifai
             {
                 var classes = new List<string>();
 
-                foreach (JValue classe in data["results"][0]["result"]["tag"]["classes"])
+                foreach (JValue classe in data["results"][0]["result"]["tag"]["classes"] ?? new JArray())
                 {
                     classes.Add(classe.Value.ToString());
                 }

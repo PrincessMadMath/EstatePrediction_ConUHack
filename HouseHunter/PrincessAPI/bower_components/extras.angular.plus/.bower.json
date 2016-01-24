@@ -1,0 +1,20 @@
+{
+  "name": "extras.angular.plus",
+  "version": "0.9.3",
+  "main": [
+    "ngplus-overlay.js"
+  ],
+  "dependencies": {
+    "angular": "^1.2.25"
+  },
+  "homepage": "https://github.com/AngularPlus/AngularPlus",
+  "_release": "0.9.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.9.3",
+    "commit": "dc52bbdf315acb51deb8de3fffd62384d31963ee"
+  },
+  "_source": "git://github.com/AngularPlus/AngularPlus.git",
+  "_target": "^0.9.2",
+  "_originalSource": "extras.angular.plus"
+}
