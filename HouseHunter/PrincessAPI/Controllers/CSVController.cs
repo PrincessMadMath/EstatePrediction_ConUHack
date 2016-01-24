@@ -13,7 +13,7 @@ namespace PrincessAPI.Controllers
         {
             // Update database
             var path = HttpContext.Current.Server.MapPath("~/");
-            path += "Utility/CSVParser/CSV/result2.csv";
+            path += "Utility/CSVParser/CSV/result3.csv";
             CSVHouseParser.UpdateDatabase(path);
         }
     }

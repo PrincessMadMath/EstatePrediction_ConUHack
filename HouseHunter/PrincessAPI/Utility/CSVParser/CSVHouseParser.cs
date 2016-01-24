@@ -51,7 +51,7 @@ namespace PrincessAPI.Utility.CSVParser
 
                     while (!csvReader.EndOfData)
                     {
-                        string[] fieldData = csvReader.ReadFields();
+                        var fieldData = csvReader.ReadFields();
 
                         // Continue to next set if null
                         if (fieldData == null) continue;

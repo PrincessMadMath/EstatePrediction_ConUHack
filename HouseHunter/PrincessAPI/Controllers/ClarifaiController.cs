@@ -1,4 +1,9 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PrincessAPI.API.AzureEstatePrediction;
 using PrincessAPI.API.Clarifai;
 using PrincessAPI.Models;
 
@@ -21,11 +26,51 @@ namespace PrincessAPI.Controllers
             return ClarifaiAccess.AccessToken;
         }
 
+        // EX : {"url": "asdasdads"}
         [Route("tag")]
         [HttpPost]
-        public string TagsFromUrl([FromBody] Url link)
+        public List<string> TagsFromUrl([FromBody] Url url)
         {
-            return ClarifaiAccess.GetTagFromUrl(link.url);
+            if(url == null)
+                return null;
+
+            var result = ClarifaiAccess.GetTagFromUrl(url.url);
+            return ClarifaiAccess.GetTagsFromJson(result);
+        }
+
+
+        // EX : [{"url": "asdasdads"},{"url": "asdasdads"}]
+        [Route("tags")]
+        [HttpPost]
+        public List<string> TagsFromUrls([FromBody] List<Url> link)
+        {
+            if (link == null)
+                return null;
+
+            return ClarifaiAccess.GetTagFromUrls(link);
+        }
+
+        [Route("predict")]
+        [HttpPost]
+        public Prediction PredictPriceFromTags([FromBody] List<Url> link)
+        {
+            if (link == null)
+                return null;
+
+            var tags = ClarifaiAccess.GetTagFromUrls(link);
+            var response = EstatePrediction.PredictWithHouseTags(ClarifaiAccess.GetPredictionTags(tags)).Result;
+
+            var data = (JObject)JsonConvert.DeserializeObject(response);
+            if (data["Results"] != null)
+            {
+                return new Prediction()
+                {
+                    price = (string)data["Results"]["output1"]["value"]["Values"][0][30],
+                    error = (string)data["Results"]["output1"]["value"]["Values"][0][31]
+                };
+            }
+
+            return null;
         }
     }
 }

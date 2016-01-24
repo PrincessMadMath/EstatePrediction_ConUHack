@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PrincessAPI.Models;
 using PrincessAPI.Utility.Web;
 
 namespace PrincessAPI.API.Clarifai
@@ -63,6 +65,51 @@ namespace PrincessAPI.API.Clarifai
 
             var endpoint = "https://api.clarifai.com/v1/tag/?url=" + url;
             return HttpRequestHelper.GetAsync(endpoint, AccessToken).Result;
+        }
+
+        public static List<string> GetTagsFromJson(string json)
+        {
+            var data = (JObject)JsonConvert.DeserializeObject(json);
+            if (data["results"] != null)
+            {
+                var classes = new List<string>();
+
+                foreach (JValue classe in data["results"][0]["result"]["tag"]["classes"])
+                {
+                    classes.Add(classe.Value.ToString());
+                }
+                return classes;
+            }
+
+            return new List<string>();
+        }
+
+        public static List<string> GetTagFromUrls(List<Url> urls)
+        {
+            var taglist = new List<string>();
+            foreach (var url in urls)
+            {
+                var result = GetTagFromUrl(url.url);
+                taglist = taglist.Concat(GetTagsFromJson(result)).ToList();
+            }
+
+            return taglist.Distinct().ToList();
+        }
+
+        public static HousePredictionTags GetPredictionTags(List<string> tags)
+        {
+            var output = new HousePredictionTags();
+
+            foreach (var tag in tags)
+            {
+                switch (tag.ToLower())
+                {
+                    case "":
+                        break;
+                }
+            }
+
+            return output;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace PrincessAPI.Models
 {
+    public enum HouseType { Condo, Maison }
+
     public class HouseModel
     {
         public int id { get; set; }
@@ -13,5 +15,7 @@
 
         public string FinalAmount { get; set; }
         public string AskingAmount { get; set; }
+
+        public HouseType HouseType { get; set; }
     }
 }
