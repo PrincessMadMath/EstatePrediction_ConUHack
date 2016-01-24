@@ -1,0 +1,17 @@
+<h2> Genius</h2>
+<div class="col-md-6">
+    <hs-main-form address="vm.address" prediction="vm.prediction"></hs-main-form>
+</div>
+<div class="col-md-6">
+    <div ng-if="vm.prediction" class="prection-view">
+        <h1>{{vm.prediction.price}}</h1>
+        <h4>{{vm.prediction.price-vm.prediction.error}} - {{vm.prediction.price+vm.prediction.error}}</h4>
+    </div>
+    <div>
+        {{vm.bound}}
+        <ng-map class="map-pos" zoom="11" center="{{vm.latlng}}" on-center-changed="vm.centerChanged()" on-zoom-changed="vm.zoom()"">
+        <marker position="{{vm.latlng}}" on-click="vm.foo(2,3)"></marker>
+        </ng-map>
+    </div>
+
+</div>

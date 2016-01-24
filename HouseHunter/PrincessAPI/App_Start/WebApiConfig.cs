@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using PrincessAPI.Infrastructure;
 using System.Data.Entity;
-using PrincessAPI.Clarifai;
+using PrincessAPI.API.Clarifai;
 
 namespace PrincessAPI
 {

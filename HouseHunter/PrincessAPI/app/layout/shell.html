@@ -1,0 +1,19 @@
+<div ng-controller="ShellController as vm">
+    <header class="clearfix">
+        <ht-top-nav navline="vm.navline"></ht-top-nav>
+    </header>
+    <section id="content" class="container">
+        <div class="page-header" style="opacity: 0">
+        </div>
+        <div ui-view class="main-content"></div>
+        <div ngplus-overlay
+             ngplus-overlay-delay-in="50"
+             ngplus-overlay-delay-out="700"
+             ngplus-overlay-animation="dissolve-animation"
+            ng-if="showSplash">
+            <img src="public/images/busy.gif"/>
+
+            <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
+        </div>
+    </section>
+</div>
