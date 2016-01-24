@@ -93,19 +93,14 @@
         </div>
     </uib-tab>
         <uib-tab heading="Pictures Analysis">
-            <label class="primary">New picture url</label>
+            <label class="info">New picture url</label>
             <input type="text" ng-model="vm.currentUrl" ng-enter="vm.addUrl()" placeholder="Enter a picture url" class="form-control">
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="url in vm.urls">{{url.url}}</li>
             </ul>
-            <button class="btn btn-info btn-wide pull-right genius-btn">
+            <button class="btn btn-primary btn-wide pull-right">
                 Ask the genius
             </button>
         </uib-tab>
     </uib-tabset>
-</form>
-
-
-<form ng-if="vm.type==='house'">
-    <input type="number" ng-model="vm.bedrooms" min="0" placeholder="Bedrooms">
 </form>
