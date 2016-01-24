@@ -2,13 +2,15 @@
     <header class="clearfix">
         <ht-top-nav navline="vm.navline"></ht-top-nav>
     </header>
-    <section id="content" class="content">
+    <section id="content" class="container">
+        <div class="page-header">
+        </div>
         <div ui-view class="shuffle-animation"></div>
-
         <div ngplus-overlay
              ngplus-overlay-delay-in="50"
              ngplus-overlay-delay-out="700"
-             ngplus-overlay-animation="dissolve-animation">
+             ngplus-overlay-animation="dissolve-animation"
+            ng-if="showSplash">
             <img src="public/images/busy.gif"/>
 
             <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>

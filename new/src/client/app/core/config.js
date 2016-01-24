@@ -14,7 +14,7 @@
 
     var config = {
         appErrorPrefix: '[houseHunter Error] ',
-        appTitle: 'houseHunter'
+        appTitle: 'House Hunter'
     };
 
     core.value('config', config);
