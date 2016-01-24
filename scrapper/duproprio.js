@@ -227,6 +227,11 @@ function sleepFor( sleepDuration ){
     while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
 }
 
+
+function setPage(url, num) {
+    return url.substr(0, url.length-2) + num
+}
+
 function scrape() {
     var promises =[];
     var url = 'http://duproprio.com/search/?hash=/g-re=6/s-pmin=0/s-pmax=99999999/s-build=1/s-parent=1/s-filter=sold/s-days=0/m-pack=house-condo/p-con=main/p-ord=date/p-dir=DESC/pa-ge=1/';
@@ -235,6 +240,7 @@ function scrape() {
         var a = results;
         return results;
     });*/
+    url = setPage(url, 101);
     for(var i =0; i<5; i++) {
         url = nextPage(url);
         promises.push(scrapMainPage(url).catch(function(error) {
@@ -247,13 +253,19 @@ function scrape() {
 }
 
 function writeToFile(results) {
-    var text = JSON.stringify((results));
     var saveLocation = path.join(__dirname, 'output2.json');
-    fs.writeFile(saveLocation, text, function(err) {
+    fs.readFile(saveLocation, function(err, data){
         if(err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
+        allData = results.concat(JSON.parse(data));
+        var text = JSON.stringify((allData));
+        fs.writeFile(saveLocation, text, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+            console.log("The file was saved!");
+        });
     });
 }
 
