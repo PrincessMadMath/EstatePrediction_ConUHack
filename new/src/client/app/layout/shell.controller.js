@@ -14,7 +14,7 @@
         $rootScope.showSplash = true;
         vm.navline = {
             title: config.appTitle,
-            text: 'Created by '
+            text: 'ConUHacks 2016'
         };
 
         activate();
