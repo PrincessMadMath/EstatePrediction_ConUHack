@@ -1,4 +1,4 @@
-<nav class="navbar navbar-fixed-top navbar-inverse myNavBar">
+<nav class="navbar navbar-fixed-top navbar-inverse" ng-class="{myNavBar:vm.state.includes('home')}">
     <div class="navbar-header">
         <a href="/" class="navbar-brand"><span class="brand-title">{{vm.navline.title}}</span></a>
         <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

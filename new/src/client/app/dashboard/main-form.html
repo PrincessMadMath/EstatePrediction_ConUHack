@@ -1,6 +1,101 @@
-<form>
+<form name="outerForm" class="tab-form-demo">
+    <uib-tabset>
+        <uib-tab heading="House">
+            <ng-form name="nestedForm">
+                <div class="form-group">
+                    <label class="info">Address</label>
+                    <input type="text" ng-model="vm.address" min="0" placeholder="Address" class="form-control">
+                    <div class="flexbox">
+                        <div class="flex-item-1">
+                            <label class="info">Number of bedrooms</label>
+                            <input type="number" ng-model="vm.home.nbBedrooms" min="0" placeholder="Bedrooms" class="form-control">
+                        </div>
+                        <div class="flex-item-1 space-around">
+                            <label class="info">Number of bathrooms</label>
+                            <input type="number" ng-model="vm.home.nbBathrooms" min="0" placeholder="Bathrooms" class="form-control">
+                        </div>
+                        <div class="flex-item-1">
+                            <label class="info">Number of rooms</label>
+                            <input type="number" ng-model="vm.home.nbRooms" min="0" placeholder="rooms" class="form-control">
+                        </div>
+                    </div>
+                    <div class="flexbox">
+                        <div class="flex-item-1">
+                            <label class="primary">Living space area (m2)</label>
+                            <input type="number" step="0.01" ng-model="vm.home.livingSpaceArea" min="0" placeholder="Living area" class="form-control">
+                        </div>
+                        <div class="flex-item-1 space-around">
+                            <label class="primary">Lot area (m2)</label>
+                            <input type="number" step="0.01" ng-model="vm.home.lot_dimension" min="0" placeholder="Lot dimension" class="form-control">
+                        </div>
+                        <div class="flex-item-1">
+                            <label class="primary">Building dimensions (m2)</label>
+                            <input type="number" step="0.01" ng-model="vm.home.buildingDimensions" min="0" placeholder="Building dimensions" class="form-control">
+                        </div>
+                    </div>
+                    <div class="flexbox">
+                        <div class="flex-item-1">
+                            <label>Year of construction</label>
+                            <input type="number" ng-model="vm.home.year_of_construction" min="0" placeholder="Year of construction" class="form-control">
+                        </div>
+                        <div class="flex-item-1">
+                            <button class="btn btn-primary btn-wide pull-right genius-btn">
+                                Ask the genius
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+        </uib-tab>
+        <uib-tab heading="Condo">
+            <div class="form-group">
+                <label class="info">Address</label>
+                <input type="text" ng-model="vm.address" min="0" placeholder="Address" class="form-control">
+                <div class="flexbox">
+                    <div class="flex-item-1">
+                        <label class="info">Number of bedrooms</label>
+                        <input type="number" ng-model="vm.condo.nbBedrooms" min="0" placeholder="Bedrooms" class="form-control">
+                    </div>
+                    <div class="flex-item-1 space-around">
+                        <label class="info">Number of bathrooms</label>
+                        <input type="number" ng-model="vm.condo.nbBathrooms" min="0" placeholder="Bathrooms" class="form-control">
+                    </div>
+                    <div class="flex-item-1">
+                        <label class="info">Number of rooms</label>
+                        <input type="number" ng-model="vm.condo.nbRooms" min="0" placeholder="rooms" class="form-control">
+                    </div>
+                </div>
+                <div class="flexbox">
+                    <div class="flex-item-1">
+                        <label class="primary">Number of level(s)</label>
+                        <input type="number"  ng-model="vm.condo.number_levels" min="0" placeholder="Number of levels" class="form-control">
+                    </div>
+                    <div class="flex-item-1 space-around">
+                        <label class="primary">Which floor</label>
+                        <input type="number" ng-model="vm.condo.which_floor" min="0" placeholder="Floor" class="form-control">
+                    </div>
+                    <div class="flex-item-1">
+                        <label class="primary">Interior parking(s)</label>
+                        <input type="number" ng-model="vm.condo.interior_parking" min="0" placeholder="Parking(s)" class="form-control">
+                    </div>
+                </div>
+                <div class="flexbox">
+                    <div class="flex-item-1">
+                        <label>Year of construction</label>
+                        <input type="number" ng-model="vm.condo.year_of_construction" min="0" placeholder="Year of construction" class="form-control">
+                    </div>
+                    <div class="flex-item-1">
+                        <button class="btn btn-primary btn-wide pull-right genius-btn">
+                            Ask the genius
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</form>
 
+
+<form ng-if="vm.type==='house'">
     <input type="number" ng-model="vm.bedrooms" min="0" placeholder="Bedrooms">
-
-
 </form>

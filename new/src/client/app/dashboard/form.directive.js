@@ -9,9 +9,13 @@
     function MainForm () {
         var directive = {
             bindToController: true,
-            controller: MainFormController,
+            controller: 'MainFormController',
             controllerAs: 'vm',
             restrict: 'EA',
+            scope: {
+                address: '=',
+                prediction: '='
+            },
             templateUrl: 'app/dashboard/main-form.html'
         };
 

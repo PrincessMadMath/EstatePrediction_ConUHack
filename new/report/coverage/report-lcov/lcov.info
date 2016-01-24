@@ -388,7 +388,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:./src/client/app/dashboard/dashboard.controller.js
+SF:./src/client/app/dashboard/home.controller.js
 FN:1,(anonymous_1)
 FN:10,DashboardController
 FN:22,activate
@@ -420,7 +420,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:./src/client/app/dashboard/dashboard.route.js
+SF:./src/client/app/dashboard/home.route.js
 FN:1,(anonymous_1)
 FN:10,appRun
 FN:14,getStates

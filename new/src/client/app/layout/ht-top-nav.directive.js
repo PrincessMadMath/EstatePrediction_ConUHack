@@ -19,8 +19,9 @@
         };
 
         /* @ngInject */
-        function TopNavController() {
+        function TopNavController($state) {
             var vm = this;
+            vm.state = $state;
         }
 
         return directive;
