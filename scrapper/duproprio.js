@@ -14,14 +14,22 @@ var a  = findProperty(url).then(function(a) {
     var c  = a;
 });*/
 
+
+function findImgUrls($) {
+    var imgs = $('.photosList > li > a').map(function(element) {
+      return this.attribs.href;
+    }).get();
+    return {img_urls: imgs};
+}
+
 function findLatLong(node) {
     var rels = node
         .attr('rel')
         .split('|')
         .map(_.trim);
     return {
-        lat: rels[0],
-        long: rels[1]
+        lat: parseFloat(rels[0]),
+        long: parseFloat(rels[1])
     };
 }
 
@@ -51,21 +59,36 @@ function findUrl(node) {
     };
 }
 
-function findSoldIn(node) {
+function findDays(delay) {
+    var b = delay.trim().split(' ');
+    if(b.length === 4){
+        return parseInt(b[0])*30 + parseInt(b[2]);
+    } else {
+        return parseInt(b[0]);
+    }
+}
+
+function findSoldInfo(node) {
     var a = node
         .find('.infoSold > p')
         .contents()
         .map(function (index, element) {
             if(element.data && _.trim(element.data) === 'Sold in') {
-                var a = element.next.children[0];
-                return a;
+                var a = element.next.children[0].data;
+                return {sold_in: findDays(a)};
+            } else if (element.data && _.trim(element.data) === 'on') {
+                var b = element.next.children[0].data.split('-');
+                return {
+                    year_sold: parseInt(b[0]),
+                    month_sold: parseInt(b[1])
+                };
             }
             return undefined;
-        })
+        }).get()
         .filter(function(value) {
             return value;
         });
-    return a;
+    return _.merge(a[0], a[1]);
 }
 
 function formatPrices(str) {
@@ -176,19 +199,20 @@ function scrapMainPage(url) {
             var arr = $('.searchresult')
                 .map(function (index, element) {
                     var houseUrl = 'http://duproprio.com/'+findUrl($(element)).url;
-                    var soldeIn = findSoldIn($(element));
                     return findProperty(houseUrl)
                         .then(function(result) {
                             return _.merge(
                                 result,
-                                {url: houseUrl,
-                                 sold_in: soldeIn})
-
+                                findSoldInfo($(element)),
+                                findLatLong($(element)),
+                                {url: houseUrl})
                         });
                 }).get();
             return Promise.all(arr).then(function(results) {
                 return results;
             });
+    }).catch(function(error) {
+        console.log(error);
     });
 
 }
@@ -198,17 +222,24 @@ function nextPage(url) {
     return url.substr(0, url.length-2) + nextPage
 }
 
+function sleepFor( sleepDuration ){
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}
+
 function scrape() {
     var promises =[];
-    var url = 'http://duproprio.com/search/?hash=/g-re=8-1-17-114-12-9-5-11-14-15-13-4-16-31-6-10-7-115-3-257-2/s-pmin=0/s-pmax=99999999/s-build=1/s-parent=1/s-filter=sold/s-days=0/m-pack=house-condo/p-con=main/p-ord=date/p-dir=DESC/pa-ge=1/';
+    var url = 'http://duproprio.com/search/?hash=/g-re=6/s-pmin=0/s-pmax=99999999/s-build=1/s-parent=1/s-filter=sold/s-days=0/m-pack=house-condo/p-con=main/p-ord=date/p-dir=DESC/pa-ge=1/';
     url = nextPage(url);
     /*return scrapMainPage(url).then(function(results) {
         var a = results;
         return results;
     });*/
-    for(var i =0; i<2; i++) {
+    for(var i =0; i<5; i++) {
         url = nextPage(url);
-        promises.push(scrapMainPage(url));
+        promises.push(scrapMainPage(url).catch(function(error) {
+            console.log(error);
+        }));
     }
     return Promise.all(promises).then(function(results) {
         writeToFile(_.flatten(results))
@@ -217,16 +248,8 @@ function scrape() {
 
 function writeToFile(results) {
     var text = JSON.stringify((results));
-    var saveLocation = path.join(__dirname, 'output.json');
+    var saveLocation = path.join(__dirname, 'output2.json');
     fs.writeFile(saveLocation, text, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("The file was saved!");
-    });
-
-
-    fs.writeFile(__dirname+"test.json", text, function(err) {
         if(err) {
             return console.log(err);
         }
@@ -241,12 +264,16 @@ function findProperty(url) {
         var finalPrice = findFinalPrice($);
         var town = findTown($);
         var address = findAddress($);
+        var imgs = findImgUrls($);
         return _.merge(
             feature,
             finalPrice,
             town,
-            address
+            address,
+            imgs
         );
+    }).catch(function(error) {
+        console.log(error);
     });
 }
 
