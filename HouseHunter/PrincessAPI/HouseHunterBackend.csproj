@@ -87,6 +87,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.WebSockets, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WebSockets.0.2.3.1\lib\net45\Microsoft.WebSockets.dll</HintPath>
       <Private>True</Private>
@@ -685,6 +686,7 @@
     <Content Include="public\node_modules\bower\templates\std\lookup.std" />
     <Content Include="public\node_modules\bower\templates\std\register.std" />
     <Content Include="public\node_modules\bower\templates\std\search-results.std" />
+    <Content Include="CSVParser\CSV\result.csv" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="public\app\app.module.js" />
     <Content Include="public\app\blocks\exception\exception-handler.provider.js" />
@@ -2114,13 +2116,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Clarifai\ClarifaiAccess.cs" />
     <Compile Include="Controllers\ClarifaiController.cs" />
+    <Compile Include="Controllers\CSVController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CSVParser\CSVparser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hash\SHA1Hash.cs" />
     <Compile Include="Infrastructure\SystemDBContext.cs" />
-    <Compile Include="Models\HighscoreModel.cs" />
-    <Compile Include="Models\TestModel.cs" />
+    <Compile Include="Models\HouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Websocket\ChatWebsocket.cs" />
     <Compile Include="Websocket\WsHttpHandler.ashx.cs">
@@ -2129,9 +2133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Web.Debug.config">

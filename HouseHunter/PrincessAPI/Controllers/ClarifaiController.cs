@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using PrincessAPI.Clarifai;
+using PrincessAPI.API.Clarifai;
 
 namespace PrincessAPI.Controllers
 {
@@ -15,7 +15,7 @@ namespace PrincessAPI.Controllers
 
         [Route("tag")]
         [HttpPost]
-        public string TagsFromUrl(string url)
+        public string TagsFromUrl([FromBody] string url)
         {
             return ClarifaiAccess.GetTagFromUrl(url);
         }
