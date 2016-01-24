@@ -11,14 +11,6 @@
         {{vm.bound}}
         <ng-map class="map-pos" zoom="11" center="{{vm.latlng}}" on-center-changed="vm.centerChanged()" on-zoom-changed="vm.zoom()"">
         <marker position="{{vm.latlng}}" on-click="vm.foo(2,3)"></marker>
-        <shape name="circle" stroke-color='#FF0000' stroke-weight="2"
-               center="{{vm.latlng}}" radius="{{vm.radius}}"
-               on-click="vm.getRadius()"
-               draggable="true"
-               on-dragstart="vm.dragStart()"
-               on-drag="vm.drag()"
-               on-dragend="vm.dragEnd()">
-        </shape>
         </ng-map>
     </div>
 
