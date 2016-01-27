@@ -31,45 +31,39 @@ namespace PrincessAPI.API.AzureEstatePrediction
                         {
                             ColumnNames = new[]
                             {
-                                "number_of_levels_basement_excl",
+                                "lat",
+                                "long",
                                 "living_space_area_basement_excl",
-                                "sold_in",
                                 "building_dimensions",
                                 "number_of_bathrooms",
                                 "total_number_of_rooms",
                                 "number_of_bedrooms",
                                 "lot_dimensions",
                                 "year_of_construction",
-                                "year_sold",
-                                "sold_in (2)",
-                                "asking_price",
                                 "final_amount"
                             },
                             Values = new[,] {
                                 {
-                                    model.number_of_levels_basement_excl,
+                                    model.lat,
+                                    model.lon,
                                     model.living_space_area_basement_excl,
-                                    model.sold_in,
                                     model.building_dimensions,
                                     model.number_of_bathrooms,
                                     model.total_number_of_rooms,
                                     model.number_of_bedrooms,
                                     model.lot_dimensions,
                                     model.year_of_construction,
-                                    model.year_sold,
-                                    model.sold_in,
-                                    model.asking_price,
                                     model.final_amount
-                                },  {"0","0","0","0","value","value","0","0","0","0","0","0","0" }  }
+                                },  { "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" }  }
                         }
                     }
                 },
                     GlobalParameters = new Dictionary<string, string>()
                 };
-                const string apiKey = "LnPVhn68tUpmnWSZxcKRPWWI3jwadmcZmchKMSFMMTdCor6fNWFbZOk9U3uGjphpOpURoR5zKayncy2G6apzpg==";
+                const string apiKey = "vOJZPDbKTAEnA/hBA0Z+2g+mXQeXdxkHIEyYVfx8nOTEi0X0TMZKOsPvA4GkjuSR4D+5lTNI5aqVGhBy0++SCQ==";
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
-                client.BaseAddress = new Uri("https://ussouthcentral.services.azureml.net/workspaces/b73bf374bbba41219bb7fb317bfd4048/services/01e28cb97ae0407e8db4560284a95837/execute?api-version=2.0&details=true");
+                client.BaseAddress = new Uri("https://ussouthcentral.services.azureml.net/workspaces/b73bf374bbba41219bb7fb317bfd4048/services/e18864b776ad4e11baddc4d427c322f1/execute?api-version=2.0&details=true");
 
                 var response = await client.PostAsJsonAsync("", scoreRequest).ConfigureAwait(false); ;
 

@@ -7,15 +7,15 @@
     <div class="flexbox">
         <label class="address-label">
             Please enter an address
-            <input ng-enter=vm.search() type="text" ng-model="vm.address" class="main-address-input input-hg form-control">
+            <input ng-enter=vm.search() type="text" ng-model="vm.address" placeholder="Enter en address" uib-typeahead="address for address in vm.getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                   class="main-address-input input-hg form-control">
+            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noResults">
+                <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
         </label>
     </div>
     <div class="page-header" style="margin-bottom: 500px;"></div>
-
-
-
-
-
 
 
 </section>

@@ -14,7 +14,9 @@
             restrict: 'EA',
             scope: {
                 address: '=',
-                prediction: '='
+                prediction: '=',
+                lat: '=',
+                lon: '='
             },
             templateUrl: 'app/dashboard/main-form.html'
         };

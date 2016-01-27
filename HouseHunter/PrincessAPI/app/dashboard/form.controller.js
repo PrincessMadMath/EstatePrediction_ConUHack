@@ -61,6 +61,8 @@
 
         function predictHouse() {
             vm.home.address = vm.address;
+            vm.home.lat = vm.lat;
+            vm.home.lon = vm.lon;
             HouseService.predictHouse(vm.home).$promise
                 .then(function(result) {
                     vm.prediction= result;
@@ -69,6 +71,8 @@
 
         function predictCondo() {
             vm.condo.address = vm.address;
+            vm.condo.lat = vm.lat;
+            vm.condo.lon = vm.lon;
             HouseService.predictCondo(vm.condo).$promise
                 .then(function(result) {
                     vm.prediction = result;

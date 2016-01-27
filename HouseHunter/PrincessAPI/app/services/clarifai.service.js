@@ -21,6 +21,6 @@ function transform(result) {
     var a ={}
     result = JSON.parse(result);
     a.price = parseInt(result.price.split('.')[0]);
-    a.error = parseInt(result.error.split('.')[0])/3;
+    a.error = parseInt(result.error.split('.')[0]);
     return a;
 }
